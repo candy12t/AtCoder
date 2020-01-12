@@ -1,14 +1,20 @@
 n, m = map(int, input().split())
-sp = [[i for i in input().split()] for _ in range(m)]
 
-ac = 0
-wa = 0
+ac = [False] * n
+pena = [0] * n
+
+acCnt = 0
+waCnt = 0
 for i in range(m):
-  s = sp[i][0]
-  p = sp[i][1]
-  if p == 'AC':
-    ac += 1
+  p, s = input().split()
+  p = int(p) - 1
+  if ac[p]:
+    continue
+  if s == 'AC':
+    ac[p] = True
+    acCnt += 1
+    waCnt += pena[p]
   else:
-    wa += 1
-  
-print(ac, wa)
+    pena[p] += 1
+
+print(acCnt, waCnt)

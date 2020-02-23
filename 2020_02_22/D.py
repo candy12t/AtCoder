@@ -1,18 +1,14 @@
-import math
-
-def f(x, y):
-    return math.factorial(x) // (math.factorial(x - y) * math.factorial(y))
-
 n, a, b = map(int, input().split())
 
-sum = 0
-for i in range(n//2):
-    x = f(n, i+1)
-    sum += x
-ans = sum*2+1
+MOD = 10**9 + 7
+x = 1
+y = 1
+ans = pow(2, n, MOD) - 1
 
-if n%2 == 0:
-    ans = sum*2+1-x
-ans = ans - f(n, a) - f(n, b)
-ans %= ((10**9)+7)
-print(ans)
+for i in range(1, b+1):
+    x = x * i % MOD
+    y = y * (n-i+1) % MOD
+    if i == a or i == b:
+        ans -= y * pow(x, MOD-2, MOD)
+
+print(ans%MOD)
